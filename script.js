@@ -221,14 +221,19 @@ function updatePhrase() {
   progressFill.style.width = `${percentage}%`;
 }
 
+
 function playAudio() {
   const phrase = phrases[currentIndex].kor;
   if ('speechSynthesis' in window) {
     const utterance = new SpeechSynthesisUtterance(phrase);
-    utterance.lang = 'ko-KR';
+    const voices = window.speechSynthesis.getVoices();
+    const koVoice = voices.find(v => v.lang.startsWith('ko'));
+    if (koVoice) utterance.voice = koVoice;
+    else utterance.lang = 'ko-KR';
     speechSynthesis.speak(utterance);
   } else {
     alert('الميزة غير مدعومة في متصفحك');
+  }
   }
 }
 
@@ -268,6 +273,8 @@ function renderFavorites() {
   });
 }
 
-// عند التحميل:
-updatePhrase();
-renderFavorites();
+window.onload = () => {
+  updatePhrase();
+  renderFavorites();
+};
+
