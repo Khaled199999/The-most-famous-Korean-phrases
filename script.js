@@ -184,8 +184,6 @@ function playAudio() {
   } else {
     alert('الميزة غير مدعومة في متصفحك');
   }
-  }
-}
 
 prevBtn.addEventListener('click', () => {
   if (currentIndex > 0) {
