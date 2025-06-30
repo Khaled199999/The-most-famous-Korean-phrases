@@ -170,7 +170,7 @@ function updatePhrase() {
   const percentage = ((currentIndex + 1) / phrases.length) * 100;
   progressFill.style.width = `${percentage}%`;
 }
-
+}
 
 function playAudio() {
   const phrase = phrases[currentIndex].kor;
@@ -184,7 +184,8 @@ function playAudio() {
   } else {
     alert('الميزة غير مدعومة في متصفحك');
   }
-}
+} 
+
 prevBtn.addEventListener('click', () => {
   if (currentIndex > 0) {
     currentIndex--;
@@ -224,4 +225,4 @@ function renderFavorites() {
 window.onload = () => {
   updatePhrase();
   renderFavorites();
-};
+});
