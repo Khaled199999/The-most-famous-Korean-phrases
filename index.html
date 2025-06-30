@@ -7,17 +7,30 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>تعلم العبارات الكورية اليومية - 150 جملة</header>
+  <header>تعلم العبارات الكورية اليومية - ١٥٠ جملة</header>
   <main>
+    <div id="progress-container">
+      <span id="progress-text">1 / 150</span>
+      <div id="progress-bar">
+        <div id="progress-fill"></div>
+      </div>
+    </div>
+
     <div class="phrase-kor" id="kor"></div>
     <div class="phrase-ar" id="ar"></div>
     <div class="phrase-en" id="en"></div>
+
     <div class="buttons">
       <button id="prevBtn" disabled>السابق</button>
       <button id="playBtn">▶️ تشغيل الصوت</button>
       <button id="nextBtn">التالي</button>
+      <button id="favBtn">⭐ أضف إلى المفضلة</button>
     </div>
+
+    <h3>المفضلة:</h3>
+    <ul id="favorites-list"></ul>
   </main>
+
   <footer>© 2025 جميع الحقوق محفوظة</footer>
 
   <script src="script.js"></script>
