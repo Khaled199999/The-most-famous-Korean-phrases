@@ -21,21 +21,14 @@ function updatePhrase() {
   prevBtn.disabled = currentIndex === 0;
   nextBtn.disabled = currentIndex === phrases.length - 1;
 
+  // شريط التقدم
   progressText.textContent = `${currentIndex + 1} / ${phrases.length}`;
   const percentage = ((currentIndex + 1) / phrases.length) * 100;
   progressFill.style.width = `${percentage}%`;
 
-  updateFavButton();
-}
-
-function updateFavButton() {
-  const phrase = phrases[currentIndex];
-  const isFavorite = favorites.some(f => f.kor === phrase.kor);
-  if (isFavorite) {
-    favBtn.classList.add('favorited');
-  } else {
-    favBtn.classList.remove('favorited');
-  }
+  // تحديث حالة زر المفضلة
+  const isFav = favorites.some(f => f.kor === phrase.kor);
+  favBtn.textContent = isFav ? '⭐️' : '☆';
 }
 
 function playAudio() {
@@ -66,21 +59,21 @@ nextBtn.addEventListener('click', () => {
   }
 });
 
-playBtn.addEventListener('click', () => {
-  playAudio();
-});
+playBtn.addEventListener('click', playAudio);
 
 favBtn.addEventListener('click', () => {
   const phrase = phrases[currentIndex];
   const index = favorites.findIndex(f => f.kor === phrase.kor);
-  if (index > -1) {
-    favorites.splice(index, 1);
-  } else {
+
+  if (index === -1) {
     favorites.push(phrase);
+  } else {
+    favorites.splice(index, 1);
   }
+
   localStorage.setItem('favorites', JSON.stringify(favorites));
   renderFavorites();
-  updateFavButton();
+  updatePhrase();
 });
 
 function renderFavorites() {
