@@ -53,7 +53,7 @@ prevBtn.addEventListener('click', () => {
 });
 
 nextBtn.addEventListener('click', () => {
-  if (currentIndex < phrases.length - 1) {
+  if (currentIndex < phrases.length - 1)
     currentIndex++;
     updatePhrase();
   }
