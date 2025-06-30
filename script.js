@@ -181,8 +181,6 @@ function updatePhrase() {
 
   updateFavButton();
 }
-
-  // تحديث حالة النجمة
   const isFav = favorites.some(f => f.kor === phrase.kor);
   if (isFav) {
     favBtn.classList.add('fav-on');
@@ -208,10 +206,8 @@ favBtn.addEventListener('click', () => {
   const phrase = phrases[currentIndex];
   const index = favorites.findIndex(f => f.kor === phrase.kor);
   if (index > -1) {
-    // موجودة → نحذفها
     favorites.splice(index, 1);
   } else {
-    // غير موجودة → نضيفها
     favorites.push(phrase);
   }
   localStorage.setItem('favorites', JSON.stringify(favorites));
