@@ -165,11 +165,9 @@ function updatePhrase() {
   prevBtn.disabled = currentIndex === 0;
   nextBtn.disabled = currentIndex === phrases.length - 1;
 
-  // تحديث شريط التقدم
   progressText.textContent = `${currentIndex + 1} / ${phrases.length}`;
   const percentage = ((currentIndex + 1) / phrases.length) * 100;
   progressFill.style.width = `${percentage}%`;
-}
 }
 
 function playAudio() {
@@ -184,7 +182,7 @@ function playAudio() {
   } else {
     alert('الميزة غير مدعومة في متصفحك');
   }
-} 
+}
 
 prevBtn.addEventListener('click', () => {
   if (currentIndex > 0) {
@@ -225,4 +223,4 @@ function renderFavorites() {
 window.onload = () => {
   updatePhrase();
   renderFavorites();
-});
+};
