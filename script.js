@@ -13,7 +13,6 @@ let currentIndex = 0;
 let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
 
 function updatePhrase() {
-  const phrase = phrases[currentIndex];
   korEl.textContent = phrase.kor;
   arEl.textContent = phrase.ar;
   enEl.textContent = phrase.en;
@@ -87,5 +86,5 @@ function renderFavorites() {
 
 window.onload = () => {
   updatePhrase();
-  renderFavorites();
+  renderFavorites()
 };
