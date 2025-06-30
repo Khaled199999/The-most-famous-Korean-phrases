@@ -148,5 +148,5 @@ const phrases = [
   { kor: "힘들어요", ar: "الأمر صعب", en: "It's hard" },
   { kor: "걱정하지 마세요", ar: "لا تقلق", en: "Don't worry" },
   { kor: "좋은 생각이에요", ar: "إنها فكرة جيدة", en: "That's a good idea" },
-  { kor: "행운을 빌어요", ar: "أتمنى لك التوفيق", en: "I wish you good luck" },
+  { kor: "행운을 빌어요", ar: "أتمنى لك التوفيق", en: "I wish you good luck" }
 ];
