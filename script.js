@@ -191,6 +191,30 @@ function updatePhrase() {
     favBtn.textContent = '⭐ أضف إلى المفضلة';
   }
 }
+function updateFavButton() {
+  const phrase = phrases[currentIndex];
+  const isFavorite = favorites.some(f => f.kor === phrase.kor);
+  if (isFavorite) {
+    favBtn.style.color = 'gold'; // نجمة ذهبية
+  } else {
+    favBtn.style.color = '#fff'; // نجمة بيضاء (أو اللون الافتراضي للزر)
+  }
+}
+
+favBtn.addEventListener('click', () => {
+  const phrase = phrases[currentIndex];
+  const index = favorites.findIndex(f => f.kor === phrase.kor);
+  if (index > -1) {
+    // موجودة → نحذفها
+    favorites.splice(index, 1);
+  } else {
+    // غير موجودة → نضيفها
+    favorites.push(phrase);
+  }
+  localStorage.setItem('favorites', JSON.stringify(favorites));
+  renderFavorites();
+  updateFavButton();
+});
 
 function playAudio() {
   const phrase = phrases[currentIndex].kor;
