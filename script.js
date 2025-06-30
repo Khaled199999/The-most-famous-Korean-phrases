@@ -142,56 +142,6 @@ const phrases = [
   { kor: "기다려 줘서 고마워요", ar: "شكراً لصبرك", en: "Thank you for waiting" }
 ];
 
-let currentIndex = 0;
-const korEl = document.getElementById('kor');
-const arEl = document.getElementById('ar');
-const enEl = document.getElementById('en');
-const prevBtn = document.getElementById('prevBtn');
-const nextBtn = document.getElementById('nextBtn');
-const playBtn = document.getElementById('playBtn');
-
-function updatePhrase() {
-  const phrase = phrases[currentIndex];
-  korEl.textContent = phrase.kor;
-  arEl.textContent = phrase.ar;
-  enEl.textContent = phrase.en;
-
-  prevBtn.disabled = currentIndex === 0;
-  nextBtn.disabled = currentIndex === phrases.length - 1;
-}
-
-function playAudio() {
-  const phrase = phrases[currentIndex].kor;
-  if ('speechSynthesis' in window) {
-    const utterance = new SpeechSynthesisUtterance(phrase);
-    utterance.lang = 'ko-KR';
-    speechSynthesis.speak(utterance);
-  } else {
-    alert('الميزة غير مدعومة في متصفحك');
-  }
-}
-
-prevBtn.addEventListener('click', () => {
-  if (currentIndex > 0) {
-    currentIndex--;
-    updatePhrase();
-  }
-});
-
-nextBtn.addEventListener('click', () => {
-  if (currentIndex < phrases.length - 1) {
-    currentIndex++;
-    updatePhrase();
-  }
-});
-
-playBtn.addEventListener('click', () => {
-  playAudio();
-});
-
-// عرض أول جملة عند تحميل الصفحة
-updatePhrase();
-
 const korEl = document.getElementById('kor');
 const arEl = document.getElementById('ar');
 const enEl = document.getElementById('en');
@@ -277,4 +227,3 @@ window.onload = () => {
   updatePhrase();
   renderFavorites();
 };
-
