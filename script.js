@@ -13,6 +13,7 @@ let currentIndex = 0;
 let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
 
 function updatePhrase() {
+  const phrase = phrases[currentIndex];
   korEl.textContent = phrase.kor;
   arEl.textContent = phrase.ar;
   enEl.textContent = phrase.en;
@@ -20,14 +21,11 @@ function updatePhrase() {
   prevBtn.disabled = currentIndex === 0;
   nextBtn.disabled = currentIndex === phrases.length - 1;
 
-  // شريط التقدم
   progressText.textContent = `${currentIndex + 1} / ${phrases.length}`;
   const percentage = ((currentIndex + 1) / phrases.length) * 100;
   progressFill.style.width = `${percentage}%`;
 
-  // تحديث حالة زر المفضلة
-  const isFav = favorites.some(f => f.kor === phrase.kor);
-  favBtn.textContent = isFav ? '⭐️' : '☆';
+  updateFavButton();
 }
 
 function playAudio() {
@@ -44,36 +42,29 @@ function playAudio() {
   }
 }
 
-prevBtn.addEventListener('click', () => {
-  if (currentIndex > 0) {
-    currentIndex--;
-    updatePhrase();
-  }
-});
-
-nextBtn.addEventListener('click', () => {
-  if (currentIndex < phrases.length - 1)
-    currentIndex++;
-    updatePhrase();
-  }
-});
-
-playBtn.addEventListener('click', playAudio);
-
-favBtn.addEventListener('click', () => {
+function updateFavButton() {
   const phrase = phrases[currentIndex];
-  const index = favorites.findIndex(f => f.kor === phrase.kor);
+  if (favorites.some(f => f.kor === phrase.kor)) {
+    favBtn.textContent = '★'; // نجمة ذهبية
+    favBtn.style.color = 'gold';
+  } else {
+    favBtn.textContent = '☆'; // نجمة فارغة
+    favBtn.style.color = 'black';
+  }
+}
 
-  if (index === -1) {
+function toggleFavorite() {
+  const phrase = phrases[currentIndex];
+  const indexInFav = favorites.findIndex(f => f.kor === phrase.kor);
+  if (indexInFav === -1) {
     favorites.push(phrase);
   } else {
-    favorites.splice(index, 1);
+    favorites.splice(indexInFav, 1);
   }
-
   localStorage.setItem('favorites', JSON.stringify(favorites));
   renderFavorites();
-  updatePhrase();
-});
+  updateFavButton();
+}
 
 function renderFavorites() {
   favoritesList.innerHTML = '';
@@ -84,7 +75,29 @@ function renderFavorites() {
   });
 }
 
+prevBtn.addEventListener('click', () => {
+  if (currentIndex > 0) {
+    currentIndex--;
+    updatePhrase();
+  }
+});
+
+nextBtn.addEventListener('click', () => {
+  if (currentIndex < phrases.length - 1) {
+    currentIndex++;
+    updatePhrase();
+  }
+});
+
+playBtn.addEventListener('click', () => {
+  playAudio();
+});
+
+favBtn.addEventListener('click', () => {
+  toggleFavorite();
+});
+
 window.onload = () => {
   updatePhrase();
-  renderFavorites()
+  renderFavorites();
 };
