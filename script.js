@@ -179,6 +179,9 @@ function updatePhrase() {
   const percentage = ((currentIndex + 1) / phrases.length) * 100;
   progressFill.style.width = `${percentage}%`;
 
+  updateFavButton();
+}
+
   // تحديث حالة النجمة
   const isFav = favorites.some(f => f.kor === phrase.kor);
   if (isFav) {
