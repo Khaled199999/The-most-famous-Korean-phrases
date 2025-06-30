@@ -128,7 +128,7 @@ const phrases = [
   { kor: "천천히 하세요", ar: "خذ وقتك", en: "Take your time" },
   { kor: "시간이 없어요", ar: "لا يوجد وقت", en: "I don't have time" },
   { kor: "곧 돌아올게요", ar: "سأعود قريباً", en: "I'll be back soon" },
-  { kor: "기다려 줘서 고마워요", ar: "شكراً لصبرك", en: "Thank you for waiting" }
+  { kor: "기다려 줘서 고마워요", ar: "شكراً لصبرك", en: "Thank you for waiting" },
   { kor: "시간 좀 내 주세요", ar: "من فضلك خصص لي بعض الوقت", en: "Please spare me some time" },
   { kor: "연락해 주세요", ar: "تواصل معي من فضلك", en: "Please contact me" },
   { kor: "곧 연락할게요", ar: "سأتواصل معك قريباً", en: "I will contact you soon" },
