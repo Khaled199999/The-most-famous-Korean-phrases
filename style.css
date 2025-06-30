@@ -65,6 +65,13 @@ button:disabled {
   cursor: not-allowed;
   box-shadow: none;
 }
+button.fav-off {
+  background-color: #ccc;
+}
+button.fav-on {
+  background-color: gold;
+  color: black;
+}
 footer {
   margin-top: 2rem;
   text-align: center;
