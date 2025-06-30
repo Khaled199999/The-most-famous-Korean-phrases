@@ -13,10 +13,10 @@ let currentIndex = 0;
 let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
 
 function updatePhrase() {
-  const phrase = phrases[currentIndex];
-  korEl.textContent = phrase.kor;
-  arEl.textContent = phrase.ar;
-  enEl.textContent = phrase.en;
+  const phrases = phrases[currentIndex];
+  korEl.textContent = phrases.kor;
+  arEl.textContent = phrases.ar;
+  enEl.textContent = phrases.en;
 
   prevBtn.disabled = currentIndex === 0;
   nextBtn.disabled = currentIndex === phrases.length - 1;
@@ -29,7 +29,7 @@ function updatePhrase() {
 }
 
 function playAudio() {
-  const phrase = phrases[currentIndex].kor;
+  const phrases = phrases[currentIndex].kor;
   if ('speechSynthesis' in window) {
     const utterance = new SpeechSynthesisUtterance(phrase);
     const voices = window.speechSynthesis.getVoices();
@@ -43,8 +43,8 @@ function playAudio() {
 }
 
 function updateFavButton() {
-  const phrase = phrases[currentIndex];
-  if (favorites.some(f => f.kor === phrase.kor)) {
+  const phrases = phrases[currentIndex];
+  if (favorites.some(f => f.kor === phrases.kor)) {
     favBtn.textContent = '★'; // نجمة ذهبية
     favBtn.style.color = 'gold';
   } else {
@@ -54,10 +54,10 @@ function updateFavButton() {
 }
 
 function toggleFavorite() {
-  const phrase = phrases[currentIndex];
-  const indexInFav = favorites.findIndex(f => f.kor === phrase.kor);
+  const phrases = phrases[currentIndex];
+  const indexInFav = favorites.findIndex(f => f.kor === phrases.kor);
   if (indexInFav === -1) {
-    favorites.push(phrase);
+    favorites.push(phrases);
   } else {
     favorites.splice(indexInFav, 1);
   }
@@ -98,6 +98,6 @@ favBtn.addEventListener('click', () => {
 });
 
 window.onload = () => {
-  updatePhrase();
+  updatePhrases();
   renderFavorites();
 };
