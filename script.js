@@ -129,6 +129,27 @@ const phrases = [
   { kor: "시간이 없어요", ar: "لا يوجد وقت", en: "I don't have time" },
   { kor: "곧 돌아올게요", ar: "سأعود قريباً", en: "I'll be back soon" },
   { kor: "기다려 줘서 고마워요", ar: "شكراً لصبرك", en: "Thank you for waiting" }
+  { kor: "시간 좀 내 주세요", ar: "من فضلك خصص لي بعض الوقت", en: "Please spare me some time" },
+{ kor: "연락해 주세요", ar: "تواصل معي من فضلك", en: "Please contact me" },
+{ kor: "곧 연락할게요", ar: "سأتواصل معك قريباً", en: "I will contact you soon" },
+{ kor: "조금 늦을 거예요", ar: "سأتأخر قليلاً", en: "I will be a bit late" },
+{ kor: "기대하고 있어요", ar: "أنا أتطلع لذلك", en: "I am looking forward to it" },
+{ kor: "좋은 소식 있어요?", ar: "هل لديك أخبار جيدة؟", en: "Do you have good news?" },
+{ kor: "잘 부탁드려요", ar: "أرجو لطفك وتعاونك", en: "I look forward to your support" },
+{ kor: "같이 갈래요?", ar: "هل ترغب بالذهاب معي؟", en: "Do you want to go together?" },
+{ kor: "사진 보내 주세요", ar: "أرسل لي صورة من فضلك", en: "Please send me a photo" },
+{ kor: "추천해 주세요", ar: "أعطني توصية من فضلك", en: "Please recommend something" },
+
+{ kor: "연습이 필요해요", ar: "أحتاج إلى ممارسة", en: "I need to practice" },
+{ kor: "같이 공부해요", ar: "لندرس معاً", en: "Let's study together" },
+{ kor: "잠깐만 기다려 주세요", ar: "انتظر لحظة من فضلك", en: "Please wait a moment" },
+{ kor: "조언해 주세요", ar: "انصحني من فضلك", en: "Please give me advice" },
+{ kor: "메일 보내 주세요", ar: "أرسل لي بريداً إلكترونياً", en: "Please send me an email" },
+{ kor: "말씀해 주셔서 감사합니다", ar: "شكراً لك على كلامك", en: "Thank you for telling me" },
+{ kor: "힘들어요", ar: "الأمر صعب", en: "It's hard" },
+{ kor: "걱정하지 마세요", ar: "لا تقلق", en: "Don't worry" },
+{ kor: "좋은 생각이에요", ar: "إنها فكرة جيدة", en: "That's a good idea" },
+{ kor: "행운을 빌어요", ar: "أتمنى لك التوفيق", en: "I wish you good luck" },
 ];
 
 const korEl = document.getElementById('kor');
@@ -157,6 +178,18 @@ function updatePhrase() {
   progressText.textContent = `${currentIndex + 1} / ${phrases.length}`;
   const percentage = ((currentIndex + 1) / phrases.length) * 100;
   progressFill.style.width = `${percentage}%`;
+
+  // تحديث حالة النجمة
+  const isFav = favorites.some(f => f.kor === phrase.kor);
+  if (isFav) {
+    favBtn.classList.add('fav-on');
+    favBtn.classList.remove('fav-off');
+    favBtn.textContent = '⭐ في المفضلة';
+  } else {
+    favBtn.classList.add('fav-off');
+    favBtn.classList.remove('fav-on');
+    favBtn.textContent = '⭐ أضف إلى المفضلة';
+  }
 }
 
 function playAudio() {
@@ -193,11 +226,17 @@ playBtn.addEventListener('click', () => {
 
 favBtn.addEventListener('click', () => {
   const phrase = phrases[currentIndex];
-  if (!favorites.some(f => f.kor === phrase.kor)) {
+  const index = favorites.findIndex(f => f.kor === phrase.kor);
+  if (index === -1) {
+    // إضافة للمفضلة
     favorites.push(phrase);
-    localStorage.setItem('favorites', JSON.stringify(favorites));
-    renderFavorites();
+  } else {
+    // إزالة من المفضلة
+    favorites.splice(index, 1);
   }
+  localStorage.setItem('favorites', JSON.stringify(favorites));
+  renderFavorites();
+  updatePhrase();
 });
 
 function renderFavorites() {
