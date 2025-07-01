@@ -13,7 +13,7 @@ let currentIndex = 0;
 let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
 
 function updatePhrase() {
-  const phrase = phrase[currentIndex];
+  const phrase = phrases[currentIndex];
   korEl.textContent = phrase.kor;
   arEl.textContent = phrase.ar;
   enEl.textContent = phrase.en;
@@ -45,10 +45,10 @@ function playAudio() {
 function updateFavButton() {
   const phrase = phrases[currentIndex];
   if (favorites.some(f => f.kor === phrase.kor)) {
-    favBtn.textContent = '★'; // نجمة ذهبية
+    favBtn.textContent = '★';
     favBtn.style.color = 'gold';
   } else {
-    favBtn.textContent = '☆'; // نجمة فارغة
+    favBtn.textContent = '☆';
     favBtn.style.color = 'black';
   }
 }
@@ -98,6 +98,6 @@ favBtn.addEventListener('click', () => {
 });
 
 window.onload = () => {
-  updatePhrases();
+  updatePhrase();
   renderFavorites();
 };
