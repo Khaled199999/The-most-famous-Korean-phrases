@@ -13,7 +13,7 @@ let currentIndex = 0;
 let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
 
 function updatePhrases() {
-  const phrases = phrases[currentIndex];
+  const phrases = phrase[currentIndex];
   korEl.textContent = phrases.kor;
   arEl.textContent = phrases.ar;
   enEl.textContent = phrases.en;
