@@ -12,11 +12,11 @@ const favoritesList = document.getElementById('favorites-list');
 let currentIndex = 0;
 let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
 
-function updatePhrases() {
-  const phrases = phrase[currentIndex];
-  korEl.textContent = phrases.kor;
-  arEl.textContent = phrases.ar;
-  enEl.textContent = phrases.en;
+function updatePhrase() {
+  const phrase = phrases[currentIndex];
+  korEl.textContent = phrase.kor;
+  arEl.textContent = phrase.ar;
+  enEl.textContent = phrase.en;
 
   prevBtn.disabled = currentIndex === 0;
   nextBtn.disabled = currentIndex === phrases.length - 1;
@@ -29,9 +29,9 @@ function updatePhrases() {
 }
 
 function playAudio() {
-  const phrases = phrases[currentIndex].kor;
+  const phrase = phrases[currentIndex].kor;
   if ('speechSynthesis' in window) {
-    const utterance = new SpeechSynthesisUtterance(phrases);
+    const utterance = new SpeechSynthesisUtterance(phrase);
     const voices = window.speechSynthesis.getVoices();
     const koVoice = voices.find(v => v.lang.startsWith('ko'));
     if (koVoice) utterance.voice = koVoice;
@@ -43,8 +43,8 @@ function playAudio() {
 }
 
 function updateFavButton() {
-  const phrases = phrases[currentIndex];
-  if (favorites.some(f => f.kor === phrases.kor)) {
+  const phrase = phrases[currentIndex];
+  if (favorites.some(f => f.kor === phrase.kor)) {
     favBtn.textContent = '★'; // نجمة ذهبية
     favBtn.style.color = 'gold';
   } else {
@@ -54,10 +54,10 @@ function updateFavButton() {
 }
 
 function toggleFavorite() {
-  const phrases = phrases[currentIndex];
-  const indexInFav = favorites.findIndex(f => f.kor === phrases.kor);
+  const phrase = phrases[currentIndex];
+  const indexInFav = favorites.findIndex(f => f.kor === phrase.kor);
   if (indexInFav === -1) {
-    favorites.push(phrases);
+    favorites.push(phrase);
   } else {
     favorites.splice(indexInFav, 1);
   }
@@ -78,14 +78,14 @@ function renderFavorites() {
 prevBtn.addEventListener('click', () => {
   if (currentIndex > 0) {
     currentIndex--;
-    updatePhrases();
+    updatePhrase();
   }
 });
 
 nextBtn.addEventListener('click', () => {
   if (currentIndex < phrases.length - 1) {
     currentIndex++;
-    updatePhrases();
+    updatePhrase();
   }
 });
 
@@ -98,6 +98,6 @@ favBtn.addEventListener('click', () => {
 });
 
 window.onload = () => {
-  updatePhrases();
+  updatePhrase();
   renderFavorites();
 };
