@@ -12,7 +12,7 @@ const favoritesList = document.getElementById('favorites-list');
 let currentIndex = 0;
 let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
 
-function updatePhrase() {
+function updatePhrases() {
   const phrases = phrases[currentIndex];
   korEl.textContent = phrases.kor;
   arEl.textContent = phrases.ar;
@@ -31,7 +31,7 @@ function updatePhrase() {
 function playAudio() {
   const phrases = phrases[currentIndex].kor;
   if ('speechSynthesis' in window) {
-    const utterance = new SpeechSynthesisUtterance(phrase);
+    const utterance = new SpeechSynthesisUtterance(phrases);
     const voices = window.speechSynthesis.getVoices();
     const koVoice = voices.find(v => v.lang.startsWith('ko'));
     if (koVoice) utterance.voice = koVoice;
