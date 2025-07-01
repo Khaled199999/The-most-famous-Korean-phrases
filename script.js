@@ -78,14 +78,14 @@ function renderFavorites() {
 prevBtn.addEventListener('click', () => {
   if (currentIndex > 0) {
     currentIndex--;
-    updatePhrase();
+    updatePhrases();
   }
 });
 
 nextBtn.addEventListener('click', () => {
   if (currentIndex < phrases.length - 1) {
     currentIndex++;
-    updatePhrase();
+    updatePhrases();
   }
 });
 
